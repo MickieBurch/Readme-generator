@@ -33,8 +33,8 @@
 
 
   ## Questions
-  Mickierouxe
-  Mickierouxe@gmail.com
+  Feel free to contact me if you have any questions at: Mickierouxe@gmail.com
+ 
 
   ## License 
 The license used by this application is AFL 3.0
