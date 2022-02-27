@@ -6,10 +6,10 @@ const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const promptUser = () => {
-    return inquirer.prompt([
+    inquirer.prompt([
       {
         type: 'input',
-        name: 'project title',
+        name: 'title',
         message: 'What is your project title? (Required)',
       },
       {
@@ -18,13 +18,6 @@ const promptUser = () => {
         message: 'Provide a short description explaining the what, why, and how of your project.(Required)',
       },
   
-      
-      {
-        type: 'checkbox',
-        name: 'contents',
-        message: 'If your README is long, add a table of contents to make it easy for users to find what they need." section?',
-        default: true
-      },
       {
         type: 'input',
         name: 'installation',
@@ -41,37 +34,53 @@ const promptUser = () => {
 
       {
         type: 'input',
-        name: 'Credits',
+        name: 'Contributing',
         message: 'List your collaborators, if any, with links to their GitHub profiles.',
         
       },
 
       {
         type: 'input',
+        name: 'Tests',
+        message: 'How do you test your application?',
+        
+      },
+
+      {
+        type: 'list',
         name: 'license',
         message: 'If you are using a license enter it here. ',
+
+        choices: ["N/A","AFL 3.0", "Apache 2.0","Artistic 2.0"]
         
       },
 
       {
         type: 'input',
-        name: 'features',
-        message: 'If your project has a lot of features list them here.',
+        name: 'QA',
+        message: 'What is your github username?',
         
       },
       
-    ]);
+      {
+        type: 'input',
+        name: 'emmailQA',
+        message: 'What is your email address?',
+        
+      },
+      
+    ]).then(function(answers){
+      console.log(answers)
+      writeToFile(answers.title,generateMarkdown(answers))
+    })
   };
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.appendFile(`${fileName}.md`, data, 
+    fs.writeFile(`${fileName}.md`, data, 
     (err) => err ? console.error(err) : console.log(`${fileName}.md has been generated.`))
 }
 
 
 
-// TODO: Create a function to initialize app
-function init() {}
-
 // Function call to initialize app
-init();
+promptUser();
